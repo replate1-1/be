@@ -15,7 +15,7 @@ describe('server.js', () => {
       const res = await request(server).get('/');
       expect(res.body).toEqual({ message: "Server up and running!"});
     });
-  });
+  }); 
 });
 
 //TODO - actually write the server code to make these run green.
