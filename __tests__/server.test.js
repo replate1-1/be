@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = require('../api/server.js');
+const router = require('../api/api-router.js');
 
 describe('server.js', () => {
   it('sets the environment to testing', () => {
@@ -8,11 +8,11 @@ describe('server.js', () => {
 
   describe('/GET', () => {
     it('connects and returns a 200 status', async () => {
-      const res = await request(server).get('/');
+      const res = await request(router).get('/');
       expect(res.status).toBe(200);
     });
     it('should return success message', async () => {
-      const res = await request(server).get('/');
+      const res = await request(router).get('/');
       expect(res.body).toEqual({ message: "Server up and running!"});
     });
   }); 
