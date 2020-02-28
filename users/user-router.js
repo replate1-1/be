@@ -54,7 +54,9 @@ router.post('/business', (req, res) => {
     });
 });
 
-//POST - /user/login(email and password)
+//login located in auth/auth-router
 
+
+//add driver and business info specific /GET requests.
 
 module.exports = router;
