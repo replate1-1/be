@@ -20,23 +20,6 @@ const Businesses = require('../users/business-model.js');
 //   const token = jwt.sign(payload, secrets.jwtSecret, options);
 // }
 
-// router.post('/register', (req, res) => {
-  
-//   let user = req.body;
-//   const hash = bcrypt.hashSync(user.password, 10);
-//   user.password = hash;
-
-//   Users.add(user)
-//     .then(newUser => {
-//       res.status(201).json(newUser);
-//     })
-//     .catch(err => {
-//       res.status(500).json({
-//         message: "error adding new user",
-//         error: err
-//       });
-//     });
-// });
 
 router.post('/login/driver', (req, res) => {
 

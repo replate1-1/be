@@ -15,6 +15,7 @@ exports.up = function(knex) {
         .notNullable()
         .unique();
     })
+    
     .createTable('businesses', tbl => {
       tbl.increments();
       tbl.string('username')
