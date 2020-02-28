@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const secrets = require('./secrets.js');
-const Users = require('../users/user-model.js');
+//const jwt = require('jsonwebtoken');
+//const secrets = require('./secrets.js');
+//const Users = require('../users/user-model.js');
 const Drivers = require('../users/driver-model.js');
 const Businesses = require('../users/business-model.js');
 
@@ -65,6 +65,27 @@ router.post('/login/business', (req, res) => {
         error: err
       });
     });
+});
+
+router.get('/logout', (req, res) => {
+  if(req.session) {
+    req.session.destroy(err => {
+      if(err) {
+        res.json({
+          message: "there was an error loggin your you, please try again",
+          error: err
+        });
+      }else {
+        res.status(200).json({
+          message: "You've been logged out, come back soon!"
+        });
+      }
+    });
+  }else {
+    res.status(200).json({
+      message: "You are already logged out."
+    });
+  }
 });
 
 module.exports = router;
