@@ -15,15 +15,46 @@ router.get('/', (req, res) => {
 });
 
 // POST - /user/driver register
-// router.post('/driver', (req, res) => {
+router.post('/driver', (req, res) => {
   
-//   let driver = req.body;
+  let driver = req.body;
 
-//   const hash = bcrypt.ha
-// })
+  const hash = bcrypt.hashSync(driver.password, 10);
+  driver.password = hash;
+
+  Drivers.add(driver)
+    .then(newDriver => {
+      res.status(201).json(newDriver);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue adding new driver",
+        error: err
+      });
+    });
+});
 
 // POST - /user/business register
+router.post('/business', (req, res) => {
+  
+  let business = req.body;
 
-//POST - login(email and password)
+  const hash = bcrypt.hashSync(business.password, 10);
+  business.password = hash;
+
+  Businesses.add(business)
+    .then(newBusiness => {
+      res.status(201).json(newBusiness);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue adding new business",
+        error: err
+      });
+    });
+});
+
+//POST - /user/login(email and password)
+
 
 module.exports = router;

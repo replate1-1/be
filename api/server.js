@@ -9,9 +9,6 @@ const secrets = require('../auth/secrets.js');
 //middleware and routers
 const apiRouter = require('./api-router.js');
 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
 
 //session config -> sent to db
 const sessionConfig = {
@@ -36,6 +33,11 @@ const sessionConfig = {
 server.get('/', (req, res) => {
   res.status(200).json({ message: "Server up and running!"})
 });
+
+server.use(helmet());
+server.use(cors());
+server.use(express.json());
+server.use(session(sessionConfig));
 
 //server.use router connections
 server.use('/api', apiRouter);

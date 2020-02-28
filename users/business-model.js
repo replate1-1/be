@@ -18,5 +18,3 @@ module.exports = {
   findBy,
   findById
 }
-
-//I'm not sure if I should make the function names more specific for readability (ex: addDriver)
