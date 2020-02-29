@@ -6,7 +6,8 @@ function find() {
       'username',
       'email',
       'businessName',
-      'businessAddress'
+      'businessAddress',
+      'phoneNumber'
     )
 }
 
