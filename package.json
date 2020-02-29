@@ -13,7 +13,8 @@
     "lambda_school",
     "server",
     "api",
-    "database"
+    "database",
+    "replate"
   ],
   "author": "Lee Wood",
   "license": "MIT",
