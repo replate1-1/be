@@ -17,3 +17,5 @@
 |   GET   | /api/user/business/:username| returns specific business data        | username, address, name, phoneNumber                   |
 |   GET   | /api/drivers          | returns a list of all drivers                  | username, name, email, phoneNumber                  |
 |   GET   | /api/businesses       | returns a list of all businesses      | username, email, businessName, businessAddress, phoneNumber  |
+|  DELETE | /api/drivers/:id  | deletes driver account                | driver id in params              |
+|  DELETE | /api/businesses/:id| deletes burinsess account            | business id in params            |
