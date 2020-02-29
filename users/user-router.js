@@ -50,9 +50,18 @@ router.post('/business', (req, res) => {
 //login located in auth/auth-router
 
 //GET all drivers
-router.get('/', (req, res) => {
-  
-})
+router.get('/drivers', (req, res) => {
+  Drivers.find()
+    .then(drivers => {
+      res.json(drivers);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve drivers",
+        error: err
+      });
+    });
+});
 
 
 
