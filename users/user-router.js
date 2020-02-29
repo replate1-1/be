@@ -49,8 +49,10 @@ router.post('/business', (req, res) => {
 
 //login located in auth/auth-router
 
-//GET all drivers
-router.get('/drivers', (req, res) => {
+//GET reqests drivers
+
+router.get('/drivers', (req, res) => { //all
+
   Drivers.find()
     .then(drivers => {
       res.json(drivers);
@@ -63,7 +65,24 @@ router.get('/drivers', (req, res) => {
     });
 });
 
-//GET all businesses
+router.get('/driver/:username', (req, res) => { //indv.
+
+  const { username } = req.params;
+
+  Drivers.findBy(username)
+    .then(driver => {
+      if(driver) {
+        res.json(driver);
+      }else {
+        res.status(404).json({})
+        
+      }
+    })
+
+
+})
+
+//GET reqests biz
 router.get('/businesses', (req, res) => {
   Businesses.find()
     .then(businesses => {
