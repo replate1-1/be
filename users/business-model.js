@@ -24,9 +24,16 @@ async function add(business) {
   return findById(id);
 }
 
+function remove(id) {
+  return db('businesses')
+    .where('id', id)
+    .del();
+}
+
 module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  remove
 }

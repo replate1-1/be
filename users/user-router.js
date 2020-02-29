@@ -51,8 +51,8 @@ router.post('/business', (req, res) => {
 //login located in auth/auth-router
 
 //TODO: add middleware to validate usernames...db dynamic variable...props? 
-//GET reqests drivers
 
+//GET requests
 router.get('/driver/:username', (req, res) => { //indv.
 
   const { username } = req.params;
@@ -78,8 +78,6 @@ router.get('/driver/:username', (req, res) => { //indv.
       });
     });
 });
-
-//GET reqests biz
 
 router.get('/business/:username', (req, res) => { //indv.
 
@@ -108,6 +106,44 @@ router.get('/business/:username', (req, res) => { //indv.
     });
 });
 
+//DELETE req 
+// ?- is there a way to make it so the code is dynamic in some way, wouldn't have to write the get and delete requests twice. Just swap in the url usertype.
+
+router.delete('/drivers/:id', (req,res) => {
+
+  const { id } = req.params;
+
+  Drivers.remove(id)
+    .then(driver => {
+      res.status(200).json({
+        message: "Driver account has been deleted."
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue deleting driver account.",
+        error: err
+      });
+    });
+});
+
+router.delete('/business/:id', (req,res) => {
+
+  const { id } = req.params;
+
+  Businesses.remove(id)
+    .then(business => {
+      res.status(200).json({
+        message: "Business account has been deleted."
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue deleting business account.",
+        error: err
+      });
+    });
+});
 
 
 module.exports = router;

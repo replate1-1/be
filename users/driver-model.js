@@ -24,11 +24,18 @@ async function add(driver) {
   return findById(id);
 }
 
+function remove(id) {
+  return db('drivers')
+    .where('id', id)
+    .del();
+}
+
 module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  remove
 }
 
 //I'm not sure if I should make the function names more specific for readability (ex: addDriver)
