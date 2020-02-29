@@ -63,6 +63,20 @@ router.get('/drivers', (req, res) => {
     });
 });
 
+//GET all businesses
+router.get('/businesses', (req, res) => {
+  Businesses.find()
+    .then(businesses => {
+      res.json(businesses);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve businesses",
+        error: err
+      });
+    });
+});
+
 
 
 module.exports = router;

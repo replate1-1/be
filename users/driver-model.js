@@ -3,10 +3,10 @@ const db = require('../database/dbConfig.js');
 function find() {
   return db('drivers')
     .select(
-      'drivers.username',
-      'drivers.email',
-      'drivers.volunteerName AS name',
-      'drivers.phoneNumber'
+      'username',
+      'email',
+      'volunteerName AS name',
+      'phoneNumber'
     );  
   
 }

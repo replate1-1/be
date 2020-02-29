@@ -1,5 +1,15 @@
 const db = require('../database/dbConfig.js');
 
+function find() {
+  return db('businesses')
+    .select(
+      'username',
+      'email',
+      'businessName',
+      'businessAddress'
+    )
+}
+
 function findBy(filter) {
   return db('businesses').where(filter).first();
 }
@@ -15,6 +25,7 @@ async function add(business) {
 
 module.exports = {
   add,
+  find,
   findBy,
   findById
 }
