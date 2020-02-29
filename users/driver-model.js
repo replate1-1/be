@@ -1,5 +1,9 @@
 const db = require('../database/dbConfig.js');
 
+function find() {
+  return db('drivers');
+}
+
 function findBy(filter) {
   return db('drivers').where(filter).first();
 }
@@ -15,6 +19,7 @@ async function add(driver) {
 
 module.exports = {
   add,
+  find,
   findBy,
   findById
 }

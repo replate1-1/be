@@ -1,3 +1,5 @@
+//!This file is no loger used, can be safely deleted. Write new tests.
+
 const db = require('../database/dbConfig.js');
 
 function findBy(filter) {
@@ -15,6 +17,7 @@ async function add(user) {
 
 module.exports = {
   add,
+  find,
   findBy,
   findById
 }

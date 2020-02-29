@@ -12,7 +12,12 @@ module.exports = {
     },
     seeds: {
       directory: './database/seeds'
-    }
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done); 
+      }
+    },
   },
   testing: {
     client: 'sqlite3',
@@ -25,6 +30,11 @@ module.exports = {
     },
     seeds: {
       directory: './database/seeds'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done); 
+      }
     },
   },
   production: {
@@ -39,6 +49,11 @@ module.exports = {
     },
     seeds: {
       directory: './database/seeds'
-    }
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done); 
+      }
+    },
   }  
 };

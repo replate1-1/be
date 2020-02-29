@@ -6,13 +6,6 @@ const Businesses = require('./business-model.js');
 //code here to return a list of users just in case that's needed??
 
 //TODO: add restritced middleware here later
-router.get('/', (req, res) => {
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
-});
 
 // POST - /user/driver register
 router.post('/driver', (req, res) => {
@@ -56,7 +49,11 @@ router.post('/business', (req, res) => {
 
 //login located in auth/auth-router
 
+//GET all drivers
+router.get('/', (req, res) => {
+  
+})
 
-//add driver and business info specific /GET requests.
+
 
 module.exports = router;

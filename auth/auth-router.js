@@ -2,7 +2,6 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 //const jwt = require('jsonwebtoken');
 //const secrets = require('./secrets.js');
-//const Users = require('../users/user-model.js');
 const Drivers = require('../users/driver-model.js');
 const Businesses = require('../users/business-model.js');
 
@@ -19,7 +18,6 @@ const Businesses = require('../users/business-model.js');
 
 //   const token = jwt.sign(payload, secrets.jwtSecret, options);
 // }
-
 
 router.post('/login/driver', (req, res) => {
 
@@ -66,6 +64,7 @@ router.post('/login/business', (req, res) => {
       });
     });
 });
+//TODO: not dry...refactor with dynamic with url tags...req.params?
 
 router.get('/logout', (req, res) => {
   if(req.session) {
