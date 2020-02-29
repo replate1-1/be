@@ -87,4 +87,31 @@ router.get('/logout', (req, res) => {
   }
 });
 
+router.get('/drivers', (req, res) => { //all
+
+  Drivers.find()
+    .then(drivers => {
+      res.json(drivers);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve drivers",
+        error: err
+      });
+    });
+});
+
+router.get('/businesses', (req, res) => {
+  Businesses.find()
+    .then(businesses => {
+      res.json(businesses);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve businesses",
+        error: err
+      });
+    });
+});
+
 module.exports = router;
