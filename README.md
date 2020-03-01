@@ -17,5 +17,6 @@
 |   GET   | /api/user/business/:username| returns specific business data        | username, address, name, phoneNumber                   |
 |   GET   | /api/drivers          | returns a list of all drivers must be logged in | username, name, email, phoneNumber                  |
 |   GET   | /api/businesses       | returns a list of all businesses must be logged in | username, email, businessName, businessAddress, phoneNumber  |
+|   GET   | /api/facilities       | returns a list of all facilities/dropoff locations| not protected endpoint, anyone can gain access   |
 |  DELETE | /api/drivers/:id  | deletes driver account                | driver id in params              |
 |  DELETE | /api/businesses/:id| deletes burinsess account            | business id in params            |
