@@ -27,9 +27,39 @@ function removePickup(id) {
     .del();
 }
 
+//functions for the purpose of driver usertypes to add existing pickups to their list of accepted dropoffs. 
+
+//join tables combining a driverId with existing pickupId...
+function addExistingPickup(driverId, pickupId) {
+  
+  const bridge = {
+    driverId: driverId,
+    pickupId: pickupId
+  }
+  
+  return db('driver-pickups').insert(bridge);
+}
+
+function findAcceptedPickups(driverId) {
+  return db('driver-pickups')
+    .join('pickups', 'id', 'driver-pickups.pickupId')
+    .join('facilities', 'id', 'pickups.dropOffId')
+    .select(
+      driverId,
+      'pickups.food',
+      'pickups.amount',
+      'pickups.description',
+      'pickups.pickUpTime',
+      'facilities.facilityAddress AS dropOffLocation'
+    )
+    //not sure if the dropoff location is going to work because the join is referencing another table that we're joining...but we'll see.
+}
+
 module.exports = {
   findPickups,
   findPickupById,
   addPickup,
-  removePickup
+  removePickup,
+  addExistingPickup,
+  findAcceptedPickups
 }
