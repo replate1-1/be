@@ -40,6 +40,8 @@ function addExistingPickup(driverId, pickupId) {
   return db('driver-pickups').insert(bridge);
 }
 
+//!Write another one of these to go directly into the business add pickups function.
+
 function findAcceptedPickups(driverId) {
   return db('driver-pickups')
     .join('pickups', 'id', 'driver-pickups.pickupId')
@@ -51,7 +53,7 @@ function findAcceptedPickups(driverId) {
       'pickups.description',
       'pickups.pickUpTime',
       'facilities.facilityAddress AS dropOffLocation'
-    )
+    );
     //not sure if the dropoff location is going to work because the join is referencing another table that we're joining...but we'll see.
 }
 
