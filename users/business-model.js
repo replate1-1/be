@@ -11,6 +11,10 @@ function find() {
     )
 }
 
+function findFacilities() {
+  return db('facilities');
+}
+
 function findBy(filter) {
   return db('businesses').where(filter).first();
 }
@@ -35,5 +39,6 @@ module.exports = {
   find,
   findBy,
   findById,
+  findFacilities,
   remove
 }

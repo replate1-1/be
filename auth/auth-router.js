@@ -117,4 +117,18 @@ router.get('/businesses', mware.restricted, (req, res) => {
     });
 });
 
+//not protected, can be accessed by anyone. Helpful center information.
+router.get('/facilities', (req, res) => {
+  Businesses.findFacilities()
+    .then(facilities => {
+      res.json(facilities);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve facilities",
+        error: err
+      });
+    });
+});
+
 module.exports = router;
