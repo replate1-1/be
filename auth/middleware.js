@@ -93,9 +93,22 @@ function validateBusinessId(req, res, next) {
     });
 }
 
+function restricted(req, res, next) {
+
+  if(req.session && req.session.user) { //req.session.user needed?
+    next();
+  }else {
+    res.status(401).json({
+      message: "Please log in."
+    });
+  }
+}
+//this isn't properly functioning and I'm not sure if the logout function is working either...Find prob and fix!
+
 module.exports = {
   validateDriverUsername,
   validateBusinessUsername,
   validateDriverId,
-  validateBusinessId
+  validateBusinessId,
+  restricted
 }

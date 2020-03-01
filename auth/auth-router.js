@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 //const secrets = require('./secrets.js');
 const Drivers = require('../users/driver-model.js');
 const Businesses = require('../users/business-model.js');
+const mware = require('./middleware.js');
 
 // function genToken(user) {
    
@@ -27,6 +28,8 @@ router.post('/login/driver', (req, res) => {
     .first()
     .then(driver => {
       if(driver && bcrypt.compareSync(password, driver.password)) {
+        req.session.user = driver;
+        console.log(req.session);
         res.status(200).json({
           message: `Welcome back, ${driver.username}`
         });
@@ -50,6 +53,7 @@ router.post('/login/business', (req, res) => {
     .first()
     .then(business => {
       if(business && bcrypt.compareSync(password, business.password)) {
+        req.session.user = business;
         res.status(200).json({
           message: `Welcome back, ${business.username}`
         });
@@ -87,7 +91,7 @@ router.get('/logout', (req, res) => {
   }
 });
 
-router.get('/drivers', (req, res) => { //all
+router.get('/drivers', mware.restricted, (req, res) => { //all
 
   Drivers.find()
     .then(drivers => {
