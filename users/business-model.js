@@ -11,6 +11,10 @@ function find() {
     )
 }
 
+function findFacilities() {
+  return db('facilities');
+}
+
 function findBy(filter) {
   return db('businesses').where(filter).first();
 }
@@ -24,9 +28,17 @@ async function add(business) {
   return findById(id);
 }
 
+function remove(id) {
+  return db('businesses')
+    .where('id', id)
+    .del();
+}
+
 module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  findFacilities,
+  remove
 }

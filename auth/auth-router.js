@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 //const secrets = require('./secrets.js');
 const Drivers = require('../users/driver-model.js');
 const Businesses = require('../users/business-model.js');
+const mware = require('./middleware.js');
 
 // function genToken(user) {
    
@@ -27,6 +28,7 @@ router.post('/login/driver', (req, res) => {
     .first()
     .then(driver => {
       if(driver && bcrypt.compareSync(password, driver.password)) {
+        req.session.user = driver;
         res.status(200).json({
           message: `Welcome back, ${driver.username}`
         });
@@ -50,6 +52,7 @@ router.post('/login/business', (req, res) => {
     .first()
     .then(business => {
       if(business && bcrypt.compareSync(password, business.password)) {
+        req.session.user = business;
         res.status(200).json({
           message: `Welcome back, ${business.username}`
         });
@@ -87,7 +90,7 @@ router.get('/logout', (req, res) => {
   }
 });
 
-router.get('/drivers', (req, res) => { //all
+router.get('/drivers', mware.restricted, (req, res) => { //all
 
   Drivers.find()
     .then(drivers => {
@@ -101,7 +104,7 @@ router.get('/drivers', (req, res) => { //all
     });
 });
 
-router.get('/businesses', (req, res) => {
+router.get('/businesses', mware.restricted, (req, res) => {
   Businesses.find()
     .then(businesses => {
       res.json(businesses);
@@ -109,6 +112,20 @@ router.get('/businesses', (req, res) => {
     .catch(err => {
       res.status(500).json({
         message: "Failed to retrieve businesses",
+        error: err
+      });
+    });
+});
+
+//not protected, can be accessed by anyone. Helpful center information.
+router.get('/facilities', (req, res) => {
+  Businesses.findFacilities()
+    .then(facilities => {
+      res.json(facilities);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Failed to retrieve facilities",
         error: err
       });
     });
