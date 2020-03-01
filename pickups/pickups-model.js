@@ -27,6 +27,12 @@ function removePickup(id) {
     .del();
 }
 
+function removeDriverPickup(pickupId) {
+  return db('driver-pickups')
+    .where('pickupId', pickupId)
+    .del();
+}
+
 //functions for the purpose of driver usertypes to add existing pickups to their list of accepted dropoffs. 
 
 //join tables combining a driverId with existing pickupId...
@@ -62,6 +68,7 @@ module.exports = {
   findPickupById,
   addPickup,
   removePickup,
+  removeDriverPickup,
   addExistingPickup,
   findAcceptedPickups
 }
