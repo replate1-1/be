@@ -3,6 +3,7 @@ const Users = require('./user-model.js');
 const bcrypt = require('bcryptjs');
 const Drivers = require('./driver-model.js');
 const Businesses = require('./business-model.js');
+const mware = require('../auth/middleware.js');
 //code here to return a list of users just in case that's needed??
 
 //TODO: add restritced middleware here later
@@ -53,7 +54,7 @@ router.post('/business', (req, res) => {
 //TODO: add middleware to validate usernames...db dynamic variable...props? 
 
 //GET requests
-router.get('/driver/:username', (req, res) => { //indv.
+router.get('/driver/:username', mware.validateDriverUsername, (req, res) => { //indv.
 
   const { username } = req.params;
 
@@ -79,7 +80,7 @@ router.get('/driver/:username', (req, res) => { //indv.
     });
 });
 
-router.get('/business/:username', (req, res) => { //indv.
+router.get('/business/:username', mware.validateBusinessUsername, (req, res) => { //indv.
 
   const { username } = req.params;
 
@@ -109,7 +110,7 @@ router.get('/business/:username', (req, res) => { //indv.
 //DELETE req 
 // ?- is there a way to make it so the code is dynamic in some way, wouldn't have to write the get and delete requests twice. Just swap in the url usertype.
 
-router.delete('/drivers/:id', (req,res) => {
+router.delete('/drivers/:id', mware.validateDriverId, (req,res) => {
 
   const { id } = req.params;
 
@@ -127,7 +128,7 @@ router.delete('/drivers/:id', (req,res) => {
     });
 });
 
-router.delete('/business/:id', (req,res) => {
+router.delete('/businesses/:id', mware.validateBusinessId, (req,res) => {
 
   const { id } = req.params;
 
