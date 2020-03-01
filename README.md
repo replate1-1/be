@@ -15,7 +15,7 @@
 |   GET   | /api/logout          | logs out current user, destroys session         |                                                     |
 |   GET   | /api/user/driver/:username | returns specific user data             | username, name, phoneNumber                            |
 |   GET   | /api/user/business/:username| returns specific business data        | username, address, name, phoneNumber                   |
-|   GET   | /api/drivers          | returns a list of all drivers                  | username, name, email, phoneNumber                  |
-|   GET   | /api/businesses       | returns a list of all businesses      | username, email, businessName, businessAddress, phoneNumber  |
+|   GET   | /api/drivers          | returns a list of all drivers must be logged in | username, name, email, phoneNumber                  |
+|   GET   | /api/businesses       | returns a list of all businesses must be logged in | username, email, businessName, businessAddress, phoneNumber  |
 |  DELETE | /api/drivers/:id  | deletes driver account                | driver id in params              |
 |  DELETE | /api/businesses/:id| deletes burinsess account            | business id in params            |
