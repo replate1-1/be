@@ -29,7 +29,6 @@ router.post('/login/driver', (req, res) => {
     .then(driver => {
       if(driver && bcrypt.compareSync(password, driver.password)) {
         req.session.user = driver;
-        console.log(req.session);
         res.status(200).json({
           message: `Welcome back, ${driver.username}`
         });
@@ -105,7 +104,7 @@ router.get('/drivers', mware.restricted, (req, res) => { //all
     });
 });
 
-router.get('/businesses', (req, res) => {
+router.get('/businesses', mware.restricted, (req, res) => {
   Businesses.find()
     .then(businesses => {
       res.json(businesses);
