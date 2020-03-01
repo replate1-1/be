@@ -1,10 +1,4 @@
 
-//table order: 
-/////facilities, 
-/////pickups(FK), 
-//businesspickups(FK), 
-//driverpickups(FK)
-
 exports.up = function(knex) {
   return knex.schema
     .createTable('facilities', tbl => {
