@@ -16,7 +16,7 @@ function findPickupById(id) {
     .first();
 }
 
-function addPickup(pickup) {
+async function addPickup(pickup) {
   const [id] = await db('pickups').insert(pickup);
   return findPickupById(id);
 }

@@ -43,7 +43,7 @@ router.get('/:userId', (req, res) => {
 //POST /pickups
 router.post('/', (req, res) => {
 
-  const pickup = res.body;
+  const pickup = req.body;
 
   Pickups.addPickup(pickup)
     .then(newPickup => {
@@ -129,3 +129,5 @@ router.delete('/user/:pickupId', (req, res) => {
 
 
 //*Possible plans for future code: rather than having a driver delete the pickup when completed, the functionality will work so when the task is updated to be completed, it removes the pickup from their main list and over to a completed table to keep records of all user/facility transactions after the fact. 
+
+module.exports = router;
