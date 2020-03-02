@@ -30,8 +30,11 @@ function removePickup(id) {
 function removeDriverPickup(pickupId) {
   return db('driver-pickups')
     .where('pickupId', pickupId)
+    //*might need driverId as well here
+    //or not because each pickup will have totally unque id? 
     .del();
 }
+
 
 //functions for the purpose of driver usertypes to add existing pickups to their list of accepted dropoffs. 
 
@@ -60,6 +63,7 @@ function findAcceptedPickups(driverId) {
       'pickups.pickUpTime',
       'facilities.facilityAddress AS dropOffLocation'
     );
+
     //not sure if the dropoff location is going to work because the join is referencing another table that we're joining...but we'll see.
 }
 
