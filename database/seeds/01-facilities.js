@@ -18,7 +18,7 @@ exports.seed = function(knex) {
         {
           facilityName: "Navigation Center",
           facilityAddress: "1950 Mission St, San Francisco, CA 94103",
-          phoneNumber: "(415) 487-3300"
+          phoneNumber: "(415) 487-3301"
         },
         {
           facilityName: "Sanctuary Shelter",

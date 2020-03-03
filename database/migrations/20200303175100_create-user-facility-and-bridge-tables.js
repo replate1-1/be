@@ -1,10 +1,45 @@
 
 exports.up = function(knex) {
+
   return knex.schema
+    .createTable('drivers', tbl => {
+      tbl.increments();
+      tbl.string('username')
+        .notNullable()
+        .unique();
+      tbl.string('email')
+        .notNullable()
+        .unique();
+      tbl.string('password').notNullable();
+      tbl.string('volunteerName').notNullable();
+      tbl.string('phoneNumber')
+        .notNullable()
+        .unique();
+    })
+    
+    .createTable('businesses', tbl => {
+      tbl.increments();
+      tbl.string('username')
+        .notNullable()
+        .unique();
+      tbl.string('email')
+        .notNullable()
+        .unique();
+      tbl.string('password').notNullable();
+      tbl.string('businessName').notNullable();
+      tbl.string('businessAddress').notNullable();
+      tbl.string('phoneNumber')
+        .notNullable()
+        .unique();
+    })
+
     .createTable('facilities', tbl => {
       tbl.increments();
       tbl.string('facilityName').notNullable();
       tbl.string('facilityAddress')
+        .notNullable()
+        .unique();
+      tbl.string('phoneNumber')
         .notNullable()
         .unique();
     })
@@ -56,9 +91,11 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema  
+  return knex.schema
     .dropIfTableExists('driver-pickups')
-    .dropIfTableExists('business-pickpus')
+    .dropIfTableExists('business-pickups')
     .dropIfTableExists('pickups')
-    .dropIfTableExists('facilities');
+    .dropIfTableExists('facilities')
+    .dropIfTableExists('businesses')
+    .dropIfTableExists('drivers');
 };
