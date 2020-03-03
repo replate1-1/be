@@ -16,11 +16,15 @@ function findFacilities() {
 }
 
 function findBy(filter) {
-  return db('businesses').where(filter).first();
+  return db('businesses')
+    .where(filter)
+    .first();
 }
 
 function findById(id) {
-  return db('businesses').where({ id }).first();
+  return db('businesses')
+    .where({ id })
+    .first();
 }
 
 async function add(business) {

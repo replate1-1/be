@@ -12,11 +12,15 @@ function find() {
 }
 
 function findBy(filter) {
-  return db('drivers').where(filter).first();
+  return db('drivers')
+    .where(filter)
+    .first();
 }
 
 function findById(id) {
-  return db('drivers').where({ id }).first();
+  return db('drivers')
+    .where({ id })
+    .first();
 }
 
 async function add(driver) {
