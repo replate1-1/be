@@ -38,22 +38,19 @@ module.exports = {
     },
   },
   production: {
-    client: 'sqlite3',
-    connection: {
-      filename: './database/replatedb.db3'
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
     migrations: {
-      directory: './database/migrations',
-      tableName: 'migrations'
+      directory: './database/migrations'
     },
     seeds: {
       directory: './database/seeds'
     },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done); 
-      }
-    },
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run('PRAGMA foreign_keys = ON', done); 
+    //   }
+    // },
   }  
 };
