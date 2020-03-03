@@ -105,3 +105,6 @@ dist
 
 # My additions
 notes.md 
+
+#SQLite3 Databases
+*.db3
