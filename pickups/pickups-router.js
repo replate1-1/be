@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
       });
     });
 });
+//!add functionality that after pickup is accepted by a user, it removes it from this table and onto an accepted table? OR that it just edits it and shows that an accepted field has been checked off.
 
 //GET /pickups/:userId
 router.get('/:userId', (req, res) => {
