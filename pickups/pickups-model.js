@@ -46,8 +46,21 @@ async function addExistingPickup(bridge) {
 
 function findAcceptedPickups(driverId) {
   return db('driver-pickups')
-    .join('pickups', 'id', 'driver-pickups.pickupId')
-    .join('facilities', 'id', 'pickups.dropOffId')
+    .join('pickups', 'pickups.id', 'driver-pickups.pickupId')
+    .join('facilities', 'facilities.id', 'pickups.dropOffId')
+    .select(
+      'driver-pickups.driverId',
+      'pickups.food',
+      'pickups.amount',
+      'pickups.description',
+      'pickups.pickUpTime',
+      'facilities.facilityName AS dropOffName',
+      'facilities.facilityAddress AS dropOffLocation'
+    );
+
+    //not sure if the dropoff location is going to work because the join is referencing another table that we're joining...but we'll see.
+
+    {/**
     .select(
       driverId,
       'pickups.food',
@@ -55,9 +68,9 @@ function findAcceptedPickups(driverId) {
       'pickups.description',
       'pickups.pickUpTime',
       'facilities.facilityAddress AS dropOffLocation'
-    );
-
-    //not sure if the dropoff location is going to work because the join is referencing another table that we're joining...but we'll see.
+    )
+    .from()
+    */}
 }
 
 module.exports = {
