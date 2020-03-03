@@ -54,6 +54,7 @@ function findAcceptedPickups(driverId) {
       'pickups.amount',
       'pickups.description',
       'pickups.pickUpTime',
+      'facilities.facilityName AS dropOffName',
       'facilities.facilityAddress AS dropOffLocation'
     );
 
