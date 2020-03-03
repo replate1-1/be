@@ -61,13 +61,20 @@ router.post('/', (req, res) => {
 router.post('/user/:userId', (req, res) => {
 
   const { userId } = req.params;
-  const pickupId = req.body;
+  const { pickupId } = req.body;
 
-  Pickups.addExistingPickup(userId, pickupId)
+  const data = {
+    pickupId,
+    driverId: userId
+  }
+
+  Pickups.addExistingPickup(data)
     .then(added => {
+      console.log(data);
       res.status(201).json(added);
     })
     .catch(err => {
+      console.log(data);
       res.status(500).json({
         message: "There was an issue adding pickup.",
         error: err
@@ -94,38 +101,19 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-//DELETE /pickups/:id 
-router.delete('/:id', (req, res) => {
-
-  const { id } = req.params;
-
-  Pickups.removePickup(id)
-    .then(pickup => {
-      res.status(200).json({
-        message: "Pickup has been deleted."
-      });
-    })
-    .catch(err => {
-      res.status(500).json({
-        message: "There has been an issue deleting pickup.",
-        error: err
-      })
-    })
-})
-
-//DELETE /pickups/user/:id 
-//*we need a way to specify which user the pickup id is coming from...
+//DELETE /pickups/user/:id  
 router.delete('/user/:pickupId', (req, res) => {
-
+  
   const { pickupId } = req.params;
 
   Pickups.removeDriverPickup(pickupId)
     .then(pickup => {
       res.status(200).json({
         message: "Pickup has been deleted from driver list."
-      })
-    })
-})
+      });
+    });
+});
+
 
 
 //*Possible plans for future code: rather than having a driver delete the pickup when completed, the functionality will work so when the task is updated to be completed, it removes the pickup from their main list and over to a completed table to keep records of all user/facility transactions after the fact. 

@@ -30,21 +30,14 @@ function removePickup(id) {
 function removeDriverPickup(pickupId) {
   return db('driver-pickups')
     .where('pickupId', pickupId)
-    //*might need driverId as well here
-    //or not because each pickup will have totally unque id? 
     .del();
 }
-
 
 //functions for the purpose of driver usertypes to add existing pickups to their list of accepted dropoffs. 
 
 //join tables combining a driverId with existing pickupId...
-function addExistingPickup(driverId, pickupId) {
-  
-  const bridge = {
-    driverId: driverId,
-    pickupId: pickupId
-  }
+
+async function addExistingPickup(bridge) {
   
   return db('driver-pickups').insert(bridge);
 }
