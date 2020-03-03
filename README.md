@@ -23,7 +23,7 @@
 |  DELETE | /api/drivers/:id  | deletes driver account                | driver id in params              |
 |  DELETE | /api/businesses/:id| deletes burinsess account            | business id in params            |
 
-### Pickups related endpoints
+### Pickup related endpoints
 
 |request|  endpoint | description                    | requires/returns                      |
 |-------|-----------|--------------------------------|---------------------------------------|
