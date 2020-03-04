@@ -57,8 +57,8 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema  
-    .dropIfTableExists('driver-pickups')
-    .dropIfTableExists('business-pickpus')
-    .dropIfTableExists('pickups')
-    .dropIfTableExists('facilities');
+    .dropTableIfExists('driver-pickups')
+    .dropTableIfExists('business-pickpus')
+    .dropTableIfExists('pickups')
+    .dropTableIfExists('facilities');
 };
