@@ -1,7 +1,7 @@
 
 exports.seed = function(knex) {
   
-  return knex('facilities').truncate()
+  return knex('facilities')
     .then(function () {
       
       return knex('facilities').insert([
