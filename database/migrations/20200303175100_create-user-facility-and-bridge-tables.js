@@ -92,10 +92,10 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropIfTableExists('driver-pickups')
-    .dropIfTableExists('business-pickups')
-    .dropIfTableExists('pickups')
-    .dropIfTableExists('facilities')
-    .dropIfTableExists('businesses')
-    .dropIfTableExists('drivers');
+    .dropTableIfExists('driver-pickups')
+    .dropTableIfExists('business-pickups')
+    .dropTableIfExists('pickups')
+    .dropTableIfExists('facilities')
+    .dropTableIfExists('businesses')
+    .dropTableIfExists('drivers');
 };
