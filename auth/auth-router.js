@@ -17,7 +17,7 @@ function genToken(user) {
     expiresIn: '12h'
   };
 
-  const token = jwt.sign(payload, secrets.jwtSecret, options);
+  return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
 router.post('/login/driver', (req, res) => {
@@ -28,10 +28,10 @@ router.post('/login/driver', (req, res) => {
     .first()
     .then(driver => {
       if(driver && bcrypt.compareSync(password, driver.password)) {
-        const token = genToken(driver)
+        const token = genToken(driver);
         res.status(200).json({
           message: `Welcome back, ${driver.username}`,
-          token: token
+          token
         });
       }else {
         res.status(401).json({ message: "invalid login" })
@@ -57,7 +57,7 @@ router.post('/login/business', (req, res) => {
 
         res.status(200).json({
           message: `Welcome back, ${business.username}`,
-          token: token
+          token
         });
       }else {
         res.status(401).json({ message: "invalid login" })

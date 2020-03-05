@@ -1,4 +1,7 @@
+const jwt = require('jsonwebtoken');
+const secrets = require('./secrets.js');
 //TODO: find a way to make these dynamic to keep DRY.
+
 
 function validateDriverUsername(req, res, next) {
   
@@ -95,15 +98,23 @@ function validateBusinessId(req, res, next) {
 
 function restricted(req, res, next) {
 
-  if(req.session && req.session.user) { //req.session.user needed?
+  const token = req.headers.authorization;
+
+  if(req.decodedJwt) {
     next();
+  }else if(token) {
+    jwt.verify(token, secrets.jwtSecret, (err, decodedJwt) => {
+      if(err) {
+        res.status(401).json({ message: "Sorry, there was an issue accessing this page" });
+      }else {
+        req.decodedJwt = decodedJwt;
+        next();
+      }
+    })
   }else {
-    res.status(401).json({
-      message: "Please log in."
-    });
+    res.status(401).json({ message: "Please log in."});
   }
-}
-//this isn't properly functioning and I'm not sure if the logout function is working either...Find prob and fix!
+};
 
 module.exports = {
   validateDriverUsername,
