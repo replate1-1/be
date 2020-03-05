@@ -12,9 +12,8 @@
 |---------|----------------------|-------------------------------------------------|-----------------------------------------------------|
 |   POST  | /api/user/driver     | creates a new user (driver)                   | username, email, password, volunteerName, phoneNumber |
 |   POST  | /api/user/business   | creates a new user (business)  | username, email, password, businessName, businessAddress phoneNumber |
-|   POST  | /api/login/driver    | login driver, returns cookie and adds session to database | username, password                        |
-|   POST  | /api/login/business  | login business, returns cookie and adds session to database | username, password                      |
-|   GET   | /api/logout          | logs out current user, destroys session         |                                                |
+|   POST  | /api/login/driver    | login driver | username, password/retuns token                        |
+|   POST  | /api/login/business  | login business | username, password/returns token                      |                                                |
 |   GET   | /api/user/driver/:username | returns specific user data             | username in params                            |
 |   GET   | /api/user/business/:username| returns specific business data        | username in params                   |
 |   GET   | /api/drivers          | returns a list of all drivers | user must be logged in to access                  |
