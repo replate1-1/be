@@ -3,6 +3,7 @@ const db = require('../database/dbConfig.js');
 function find() {
   return db('businesses')
     .select(
+      'id',
       'username',
       'email',
       'businessName',

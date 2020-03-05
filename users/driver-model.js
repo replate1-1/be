@@ -3,6 +3,7 @@ const db = require('../database/dbConfig.js');
 function find() {
   return db('drivers')
     .select(
+      'id',
       'username',
       'email',
       'volunteerName AS name',
