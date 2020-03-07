@@ -19,8 +19,8 @@
 |   GET   | /api/drivers          | returns a list of all drivers | user must be logged in to access                  |
 |   GET   | /api/businesses       | returns a list of all businesses  | user must be logged in to access  |
 |   GET   | /api/facilities       | returns a list of all facilities/dropoff locations| not protected endpoint, anyone can gain access |
-|  DELETE | /api/user/drivers/:id  | deletes driver account                | driver id in params              |
-|  DELETE | /api/user/businesses/:id| deletes burinsess account            | business id in params            |
+|  DELETE | /api/user/driver/:id  | deletes driver account                | driver id in params              |
+|  DELETE | /api/user/business/:id| deletes burinsess account            | business id in params            |
 
 ### Pickup related endpoints
 
