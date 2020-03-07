@@ -2,8 +2,8 @@
 
 - [Product Doc](https://docs.google.com/document/d/1s1-mHEn4bQZuq-wBrxv-JhNILDFDym0seSC5CY-Li4Y/edit#)
 
-## Postman Documentation
-[postmandoc](https://documenter.getpostman.com/view/10645138/SzRw3ryq?version=latest#74d0a1cf-7826-4456-8144-a2d09edcfabd)
+# Postman Documentation
+### [postmandoc](https://documenter.getpostman.com/view/10645138/SzRw3ryq?version=latest#74d0a1cf-7826-4456-8144-a2d09edcfabd)
 
 - Documents all API requests with code snippet example and short explainations of each.
 
