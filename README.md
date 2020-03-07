@@ -29,7 +29,7 @@
 | GET   | /api/pickups| returns list of all available pickups | user must be logged in |
 | GET   | /api/pickups/driver/:driverId | returns list of all driver accepted pickups | user must be logged in|
 | GET   | /api/pickups/:businessUsername | returns list of all pickups for one business | business username in parameters |
-| POST  | /api/pickups/:businessUsername | adds new pickup             | food, amount, description(optional for now), pickupTime, dropoffId (optional for now), lat, lng |
+| POST  | /api/pickups/:businessUsername | adds new pickup             | food, amount, description(optional for now), time, date, dropoffId (optional for now), lat, lng |
 | PUT    | /api/user/business/pickups/:pickupId | edits existing pickup info | pickup id in parameter | 
 | POST  | /api/pickups/driver/:userId | adds existing pickup to drivers accepted pickups list | driver id in parameters, pickupId in body |
 | DELETE | /api/pickups/:pickupId | removes existing pickup from main pickup list | pickup id in params |
