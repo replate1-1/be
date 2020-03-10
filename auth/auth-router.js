@@ -1,24 +1,24 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-//const jwt = require('jsonwebtoken');
-//const secrets = require('./secrets.js');
+const jwt = require('jsonwebtoken');
+const secrets = require('./secrets.js');
 const Drivers = require('../users/driver-model.js');
 const Businesses = require('../users/business-model.js');
 const mware = require('./middleware.js');
 
-// function genToken(user) {
+function genToken(user) {
    
-//   const payload = {
-//     userId: user.id,
-//     username: user.username
-//   };
+  const payload = {
+    userId: user.id,
+    username: user.username
+  };
 
-//   const options = {
-//     expiresIn: '4h'
-//   };
+  const options = {
+    expiresIn: '12h'
+  };
 
-//   const token = jwt.sign(payload, secrets.jwtSecret, options);
-// }
+  return token = jwt.sign(payload, secrets.jwtSecret, options);
+}
 
 router.post('/login/driver', (req, res) => {
 
@@ -28,9 +28,10 @@ router.post('/login/driver', (req, res) => {
     .first()
     .then(driver => {
       if(driver && bcrypt.compareSync(password, driver.password)) {
-        req.session.user = driver;
+        const token = genToken(driver);
         res.status(200).json({
-          message: `Welcome back, ${driver.username}`
+          message: `Welcome back, ${driver.username}`,
+          token
         });
       }else {
         res.status(401).json({ message: "invalid login" })
@@ -52,9 +53,10 @@ router.post('/login/business', (req, res) => {
     .first()
     .then(business => {
       if(business && bcrypt.compareSync(password, business.password)) {
-        req.session.user = business;
+        const token = genToken(business);
         res.status(200).json({
-          message: `Welcome back, ${business.username}`
+          message: `Welcome back, ${business.username}`,
+          token
         });
       }else {
         res.status(401).json({ message: "invalid login" })
@@ -68,27 +70,6 @@ router.post('/login/business', (req, res) => {
     });
 });
 //TODO: not dry...refactor with dynamic with url tags...req.params?
-
-router.get('/logout', (req, res) => {
-  if(req.session) {
-    req.session.destroy(err => {
-      if(err) {
-        res.json({
-          message: "there was an error loggin your you, please try again",
-          error: err
-        });
-      }else {
-        res.status(200).json({
-          message: "You've been logged out, come back soon!"
-        });
-      }
-    });
-  }else {
-    res.status(200).json({
-      message: "You are already logged out."
-    });
-  }
-});
 
 router.get('/drivers', mware.restricted, (req, res) => { //all
 

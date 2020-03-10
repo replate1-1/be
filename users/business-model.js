@@ -3,6 +3,7 @@ const db = require('../database/dbConfig.js');
 function find() {
   return db('businesses')
     .select(
+      'id',
       'username',
       'email',
       'businessName',
@@ -28,7 +29,7 @@ function findById(id) {
 }
 
 async function add(business) {
-  const [id] = await db('businesses').insert(business);
+  const [id] = await db('businesses').insert(business, "id");
   return findById(id);
 }
 

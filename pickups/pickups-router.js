@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
 });
 //!add functionality that after pickup is accepted by a user, it removes it from this table and onto an accepted table? OR that it just edits it and shows that an accepted field has been checked off.
 
-//GET /pickups/:userId
-router.get('/:userId', (req, res) => {
+//GET /pickups/driver/:userId
+router.get('/driver/:userId', (req, res) => {
 
   const { userId } = req.params;
 
@@ -28,7 +28,7 @@ router.get('/:userId', (req, res) => {
       if(pickups) {
         res.json(pickups);
       }else {
-        res.status(404).json({
+        res.status(200).json({
           message: "This user has no accepted pickups at this time."
         });
       }
@@ -41,10 +41,43 @@ router.get('/:userId', (req, res) => {
     });
 });
 
-//POST /pickups
-router.post('/', (req, res) => {
+router.get('/:businessUsername', (req, res) => {
+  const { businessUsername } = req.params;
 
-  const pickup = req.body;
+  Pickups.findBusinessPickups(businessUsername)
+    .then(pickups => {
+      
+      if(pickups) {
+        
+        res.json(pickups);
+      }else {
+        res.status(200).json({
+          message: "This user has no pickups at this time."
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue getting user pickups.",
+        error: err
+      });
+    });
+});
+
+//POST /pickups
+router.post('/:businessUsername', (req, res) => {
+  const { businessUsername } = req.params
+  const pickup = {
+    food: req.body.food,
+    amount: req.body.amount,
+    description: req.body.description,
+    time: req.body.time,
+    date: req.body.date,
+    dropOffId: req.body.dropOffId,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    businessUsername: businessUsername
+  }
 
   Pickups.addPickup(pickup)
     .then(newPickup => {
@@ -59,7 +92,7 @@ router.post('/', (req, res) => {
 });
 
 //POST pickups/user
-router.post('/user/:userId', (req, res) => {
+router.post('/driver/:userId', (req, res) => {
 
   const { userId } = req.params;
   const { pickupId } = req.body;
@@ -71,8 +104,9 @@ router.post('/user/:userId', (req, res) => {
 
   Pickups.addExistingPickup(data)
     .then(added => {
-      console.log(data);
-      res.status(201).json(added);
+      res.status(201).json({
+        message: "Pickup added to driver list."
+      });
     })
     .catch(err => {
       console.log(data);
@@ -103,7 +137,7 @@ router.delete('/:id', (req, res) => {
 });
 
 //DELETE /pickups/user/:id  
-router.delete('/user/:pickupId', (req, res) => {
+router.delete('/driver/:pickupId', (req, res) => {
   
   const { pickupId } = req.params;
 

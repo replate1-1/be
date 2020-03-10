@@ -109,3 +109,4 @@ notes.md
 #SQLite3 Databases
 replatedb.db3/
 users-temp.db3/
+*.db3/

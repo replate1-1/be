@@ -1,7 +1,7 @@
 {
   "name": "build_week_server",
   "version": "1.0.0",
-  "description": "base server for lambda build week 2/2020",
+  "description": "backend for lambda unit 4 build week 2/24-3/060",
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",

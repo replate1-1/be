@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const Users = require('./user-model.js');
 const bcrypt = require('bcryptjs');
+const db = require('../database/dbConfig.js');
 const Drivers = require('./driver-model.js');
 const Businesses = require('./business-model.js');
+const Pickups = require('../pickups/pickups-model.js')
 const mware = require('../auth/middleware.js');
 //code here to return a list of users just in case that's needed??
 
@@ -62,7 +63,9 @@ router.get('/driver/:username', mware.validateDriverUsername, (req, res) => { //
     .then(driver => {
       if(driver) {
         res.json({
+          id: driver.id,
           username: driver.username,
+          email: driver.email,
           name: driver.volunteerName,
           phoneNumber: driver.phoneNumber
         });
@@ -88,9 +91,11 @@ router.get('/business/:username', mware.validateBusinessUsername, (req, res) => 
     .then(business => {
       if(business) {
         res.json({
+          id: business.id,
           username: business.username,
+          email: business.email,
           address: business.businessAddress,
-          name: business.businessName,
+          businessName: business.businessName,
           phoneNumber: business.phoneNumber
         });
       }else {
@@ -107,10 +112,31 @@ router.get('/business/:username', mware.validateBusinessUsername, (req, res) => 
     });
 });
 
+//PUT update pickups for specific user
+
+router.put('/business/pickups/:id', (req, res) => {
+
+  const { id } = req.params;
+  const changes = req.body;
+
+  Pickups.updatePickup(changes, id)
+    .then(updated => {
+      res.status(200).json({
+        recordsUpdated: updated
+      })
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "There was an issue updating pickup.",
+        error: err
+      });
+    });
+});
+
 //DELETE req 
 // ?- is there a way to make it so the code is dynamic in some way, wouldn't have to write the get and delete requests twice. Just swap in the url usertype.
 
-router.delete('/drivers/:id', mware.validateDriverId, (req,res) => {
+router.delete('/driver/:id', mware.validateDriverId, (req,res) => {
 
   const { id } = req.params;
 
@@ -128,7 +154,7 @@ router.delete('/drivers/:id', mware.validateDriverId, (req,res) => {
     });
 });
 
-router.delete('/businesses/:id', mware.validateBusinessId, (req,res) => {
+router.delete('/business/:id', mware.validateBusinessId, (req,res) => {
 
   const { id } = req.params;
 

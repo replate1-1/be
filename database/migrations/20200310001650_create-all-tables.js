@@ -1,6 +1,4 @@
-
 exports.up = function(knex) {
-
   return knex.schema
     .createTable('drivers', tbl => {
       tbl.increments();
@@ -58,10 +56,10 @@ exports.up = function(knex) {
     })
 
     .createTable('business-pickups', tbl => {
-      tbl.integer('businessId')
+      tbl.string('businessUsername')
         .notNullable()
         .unsigned()
-        .references('businesses.id')
+        .references('businesses.username')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
       tbl.integer('pickupId')
@@ -88,10 +86,19 @@ exports.up = function(knex) {
         .onDelete('CASCADE');
       tbl.boolean('delivered').defaultTo(false);
     })
+
+    .createTable('sessions', tbl => {
+      tbl.string('sid', 255)
+        .primary()
+        .notNullable();
+      tbl.json('sess').notNullable()
+      tbl.datetime('expired').notNullable();
+    });
 };
 
 exports.down = function(knex) {
-  return knex.schema
+  return knex.schema  
+    .dropTableIfExists('sessions')
     .dropTableIfExists('driver-pickups')
     .dropTableIfExists('business-pickups')
     .dropTableIfExists('pickups')

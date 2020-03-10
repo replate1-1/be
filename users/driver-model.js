@@ -3,6 +3,7 @@ const db = require('../database/dbConfig.js');
 function find() {
   return db('drivers')
     .select(
+      'id',
       'username',
       'email',
       'volunteerName AS name',
@@ -24,7 +25,7 @@ function findById(id) {
 }
 
 async function add(driver) {
-  const [id] = await db('drivers').insert(driver);
+  const [id] = await db('drivers').insert(driver, "id");
   return findById(id);
 }
 
